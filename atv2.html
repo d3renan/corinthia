@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATV 2</title>
+</head>
+<body>
+    <p><span id="texto"></span></p>
+    <br>
+    <p>A turma teve <span id="alunos-aprovados-nota"></span> alunos aprovados e <span id="alunos-reprovados-nota"></span> reprovados por nota.</p>
+    <p>A turma teve <span id="alunos-aprovados-falta"></span> alunos aprovados e <span id="alunos-reprovados-falta"></span> reprovados por falta.</p>
+    <br>
+    <p>A maior media da sala foi: <span id="mMaior"></span>.</p>
+    <p>A menor media da sala foi: <span id="mMenor"></span>.</p>
+
+    <script>
+        let nome;
+        let contLoop = 1;
+        let numMatricula;
+        let nota1;
+        let nota2;
+        let nota3;
+        let media;
+        let freq;
+        let aprov;
+        let aprovNota;
+        let aprovFalta;
+        let aprovadoNota = 0;
+        let reprovadoNota = 0;
+        let aprovadoFalta = 0;
+        let reprovadoFalta = 0;
+        let texto = "";
+        let mediaTurma;
+        let tAlunos = 0;
+        let mTurma = 0;
+        let mMaior = 0;
+        let mMenor = 10;
+        
+        while (contLoop <= 3) {
+            numMatricula = prompt("Digite o numero da matricula do aluno.");
+            nome = prompt("Qual o nome do aluno número " + numMatricula + "?");
+                nota1 = Number(prompt("Digite a primeira nota de " + nome + "?"));
+                nota2 = Number(prompt("Digite a segunda nota de " + nome + "?"));
+                nota3 = Number(prompt("Digite a terceira nota de " + nome + "?"));
+                media = (nota1 + nota2 + nota3)/3;
+                freq = Number(prompt("Quantos dias " + nome + " frequentou?"));
+
+                if (media >= 7) {
+                    aprovNota = "aprovado"
+                    aprovadoNota++;
+                }else{
+                    aprovNota = "reprovado"
+                    reprovadoNota++;
+                }
+
+                if (freq > 25) {
+                    aprovFalta = "aprovado"
+                    aprovadoFalta++;
+                }else{
+                    aprovFalta = "reprovado"
+                    reprovadoFalta++;
+                }
+
+                if (aprovFalta && aprovNota == "aprovado") {
+                    aprov = "aprovado"
+                }else{
+                    aprov = "reprovado"
+                }
+
+                texto ="Nome: " + nome + "</br>" + "Numero da matricula: " + numMatricula + "</br>" + "Media do aluno:" + media + "</br>" + "Aluno " + aprov + ".";
+
+                document.getElementById("texto").innerHTML += texto + "</br>" + "</br>";
+                contLoop++;
+                tAlunos++;
+
+                mTurma += media;
+                mTurma = mTurma/tAlunos;
+
+                if (media > mMaior) {
+                    mMaior = media
+                }
+
+                if (media < mMenor) {
+                    mMenor = media;
+                }
+
+                document.getElementById("mMaior").innerHTML = mMaior
+                document.getElementById("mMenor").innerHTML = mMenor
+                
+            }
+            
+        document.getElementById("alunos-aprovados-nota").innerHTML = aprovadoNota;
+        document.getElementById("alunos-reprovados-nota").innerHTML = reprovadoNota;
+        document.getElementById("alunos-aprovados-falta").innerHTML = aprovadoFalta;
+        document.getElementById("alunos-reprovados-falta").innerHTML = reprovadoFalta;
+    </script>
+</body>
+</html>
